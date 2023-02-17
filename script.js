@@ -2,7 +2,7 @@ let al = document.querySelectorAll("#article-link");
 let acs = document.querySelectorAll("#article-content-summary");
 let ah = document.querySelectorAll("#article-heading");
 
-const url = 'https://www.bbc.com/news';
+const url = 'https://cors-anywhere.herokuapp.com/https://www.bbc.com/news';
 
 window.onload = fireEvent();
 
@@ -19,7 +19,7 @@ async function fireEvent() {
         const most_popular = doc.querySelectorAll('li[data-entityid="most-popular-read-'+(i+1)+'"]');
         const firstHeadline = most_popular[0];
         const link = firstHeadline.querySelector('a').getAttribute('href');
-        links.push('https://www.bbc.com' + link);
+        links.push('https://cors-anywhere.herokuapp.com/https://www.bbc.com' + link);
         al[i].innerText = 'https://www.bbc.com' + link;
         ah[i].innerText = i+1;
     }
