@@ -2,7 +2,7 @@ let al = document.querySelectorAll("#article-link");
 let acs = document.querySelectorAll("#article-content-summary");
 let ah = document.querySelectorAll("#article-heading");
 
-// const url = "https://www.bbc.co.uk/news";
+const url = 'https://www.bbc.com/news';
 
 window.onload = fireEvent();
 
@@ -11,7 +11,7 @@ let contents = [];
 let summaries = [];
 
 async function fireEvent() {
-    const response = await fetch('https://www.bbc.com/news');
+    const response = await fetch(url, { mode: 'cors' });
     const data = await response.text();
     const parser = new DOMParser();
     const doc = parser.parseFromString(data, 'text/html');
@@ -21,10 +21,9 @@ async function fireEvent() {
         const link = firstHeadline.querySelector('a').getAttribute('href');
         links.push('https://www.bbc.com' + link);
         al[i].innerText = 'https://www.bbc.com' + link;
-        ah[i].innerText = i;
+        ah[i].innerText = i+1;
     }
     for (let i = 0; i < 10; i++) {
-        console.log(links[i]);
         const text = await get_bbc_text(links[i]);
         contents.push(text);
         acs[i].innerText = text;
@@ -32,7 +31,7 @@ async function fireEvent() {
 }
 
 async function get_bbc_text(url) {
-    const response = await fetch(url);
+    const response = await fetch(url, { mode: 'cors' });
     const data = await response.text();
     const parser = new DOMParser();
     const doc = parser.parseFromString(data, 'text/html');
@@ -47,4 +46,3 @@ async function get_bbc_text(url) {
     }
     return text;
 }
-  
